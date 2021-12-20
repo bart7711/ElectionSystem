@@ -11,4 +11,5 @@ public interface CandidateServiceInterface {
     void deleteCandidate(int candidateId);
     Candidate editCandidate(int id, int partyId, Candidate candidate);
     List<Candidate> getByPartyId(int partyId);
+    void vote(int id);
 }

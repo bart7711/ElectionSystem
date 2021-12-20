@@ -30,4 +30,8 @@ public interface CandidateControllerInterface {
     CandidateDTO editCandidate(@PathVariable int id, @PathVariable int partyId,
                                @RequestBody CandidateDTO candidateDTO);
 
+    @PutMapping("/vote/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void vote(@PathVariable int id);
+
 }

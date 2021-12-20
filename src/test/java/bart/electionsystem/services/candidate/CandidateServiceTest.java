@@ -83,4 +83,12 @@ class CandidateServiceTest {
         long count = candidateService.getByPartyId(1).size();
         assertEquals(2, count);
     }
+
+    @Test
+    @Sql("/createData.sql")
+    void vote() {
+        candidateService.vote(1);
+        int votes = candidateService.getById(1).getVotes();
+        assertEquals(1,votes);
+    }
 }

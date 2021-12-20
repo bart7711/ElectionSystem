@@ -54,4 +54,9 @@ public class CandidateController implements CandidateControllerInterface{
         return dtoConverter.convertToCandidateDTO(candidateService
                 .editCandidate(id, partyId, dtoConverter.convertToCandidate(candidateDTO)));
     }
+
+    @Override
+    public void vote(int id) {
+        candidateService.vote(id);
+    }
 }
