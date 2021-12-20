@@ -45,5 +45,10 @@ public class DTOConverter {
                 .map(this::convertToCandidateDTO)
                 .collect(Collectors.toList());
     }
+    public List<PartyDTO> convertToListOfPartyDTO(List<Party> parties){
+        return parties.stream()
+                .map(this::convertToPartyDTO)
+                .collect(Collectors.toList());
+    }
 
 }
