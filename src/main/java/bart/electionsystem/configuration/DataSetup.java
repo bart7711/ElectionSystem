@@ -6,10 +6,12 @@ import bart.electionsystem.repositories.CandidateRepo;
 import bart.electionsystem.repositories.PartyRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Configuration
 @Component
+@Profile("!test")
 public class DataSetup implements CommandLineRunner {
     CandidateRepo candidateRepo;
     PartyRepo partyRepo;
@@ -24,7 +26,7 @@ public class DataSetup implements CommandLineRunner {
         Party party0 = partyRepo.save(new Party("Socialdemokratiet", 'A', "Social democracy"));
         Party party1 = partyRepo.save(new Party("Det konservative Folkeparti", 'C', "Conservative liberalism"));
         Party party2 = partyRepo.save(new Party("SF, Socialistisk Folkeparti", 'F', "Social liberalism"));
-        Party party3 = partyRepo.save(new Party("- Dansk Folkeparti", 'O', "Monarchy"));
+        Party party3 = partyRepo.save(new Party("Dansk Folkeparti", 'O', "Monarchy"));
 
         Candidate candidate0 = candidateRepo.save(new Candidate("Marcel Meijer", party0));
         Candidate candidate1 = candidateRepo.save(new Candidate("Michael Kristensen", party0));
