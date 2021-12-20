@@ -55,6 +55,8 @@ class CandidateServiceTest {
         Candidate candidate = candidateService.createCandidate(newCandidate, 1);
         long count = candidateService.getAll().size();
         assertEquals(4,count);
+        assertEquals("Test test", candidate.getFullName());
+        assertEquals(1,candidate.getParty().getId());
     }
 
     @Test
