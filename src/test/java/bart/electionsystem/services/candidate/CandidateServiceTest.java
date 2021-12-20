@@ -70,8 +70,8 @@ class CandidateServiceTest {
     void editCandidate() {
         Candidate edit = new Candidate();
         edit.setFullName("Testing Testing");
-        Candidate editedCandidate = candidateService.editCandidate(1,1,edit);
-        editedCandidate = candidateService.getById(1);
+        candidateService.editCandidate(1,1,edit);
+        Candidate editedCandidate = candidateService.getById(1);
         assertEquals("Testing Testing",editedCandidate.getFullName());
     }
 
