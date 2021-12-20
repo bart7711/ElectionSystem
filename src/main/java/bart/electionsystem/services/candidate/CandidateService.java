@@ -6,6 +6,7 @@ import bart.electionsystem.repositories.CandidateRepo;
 import bart.electionsystem.repositories.PartyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class CandidateService implements CandidateServiceInterface {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public Candidate createCandidate(Candidate candidate, int partyId) {
         return candidateRepo.save(new Candidate(candidate.getFullName(),
                 partyRepo.findById(partyId)
@@ -41,6 +43,7 @@ public class CandidateService implements CandidateServiceInterface {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public void deleteCandidate(int candidateId) {
         if (!candidateRepo.existsById(candidateId)) {
             throw new ResourceNotFoundException("There is no such projection in our system");
@@ -49,6 +52,7 @@ public class CandidateService implements CandidateServiceInterface {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public Candidate editCandidate(int id, int partyId, Candidate candidate) {
         Candidate updatedCandidate = candidateRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("There is no candidate with id " + id));
@@ -74,6 +78,7 @@ public class CandidateService implements CandidateServiceInterface {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public void vote(int id) {
         Candidate candidate = candidateRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("There is no Candidate with id:" + id));
         candidate.setVotes(candidate.getVotes()+1);
