@@ -79,9 +79,9 @@ public class CandidateService implements CandidateServiceInterface {
 
     @Override
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-    public void vote(int id) {
+    public Candidate vote(int id) {
         Candidate candidate = candidateRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("There is no Candidate with id:" + id));
         candidate.setVotes(candidate.getVotes()+1);
-        candidateRepo.save(candidate);
+        return candidateRepo.save(candidate);
     }
 }

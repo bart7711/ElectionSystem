@@ -2,6 +2,7 @@ package bart.electionsystem.rest.candidate;
 
 import bart.electionsystem.dtos.CandidateDTO;
 import bart.electionsystem.dtos.converter.DTOConverter;
+import bart.electionsystem.entities.Candidate;
 import bart.electionsystem.services.candidate.CandidateServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +57,7 @@ public class CandidateController implements CandidateControllerInterface{
     }
 
     @Override
-    public void vote(int id) {
-        candidateService.vote(id);
+    public CandidateDTO vote(int id) {
+        return dtoConverter.convertToCandidateDTO(candidateService.vote(id));
     }
 }
