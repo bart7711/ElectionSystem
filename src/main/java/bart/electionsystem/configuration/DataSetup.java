@@ -47,7 +47,7 @@ public class DataSetup implements CommandLineRunner {
         roleRepository.save(adminRole);
         roleRepository.save(customerRole);
 
-        User customer = new User("customer", "customer@example.com", passwordEncoder.encode("test"));
+        User customer = new User("voter", "customer@example.com", passwordEncoder.encode("test"));
         User admin = new User("admin", "admin@example.com", passwordEncoder.encode("test"));
         customer.addRole(customerRole);
         admin.addRole(adminRole);

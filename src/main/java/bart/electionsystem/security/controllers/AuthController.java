@@ -51,7 +51,6 @@ public class AuthController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
-	//public ResponseEntity<?>
 	public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
@@ -63,12 +62,11 @@ public class AuthController {
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		List<String> roles = userDetails.getAuthorities()
 				.stream()
-				.map(GrantedAuthority::getAuthority) //.map(item -> item.getAuthority())
+				.map(GrantedAuthority::getAuthority)
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(new JwtResponse(jwt,
-//												 userDetails.getId(),
-												 userDetails.getUsername(), 
+												 userDetails.getUsername(),
 												 userDetails.getEmail(), 
 												 roles));
 	}
@@ -83,7 +81,6 @@ public class AuthController {
 			throw new Client4xxException(" Email is already in use");
 		}
 
-		// Create new user's account
 		User user = new User(signUpRequest.getUsername(),
 							 signUpRequest.getEmail(),
 							 encoder.encode(signUpRequest.getPassword()));
